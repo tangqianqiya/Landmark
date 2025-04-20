@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  CategoryHome.swift
 //  Landmarks
 //
 //  Created by Tang Qianqi on 2025/4/17.
@@ -12,37 +12,45 @@ struct CategoryHome: View {
     @State private var showingProfile = false
 
     var body: some View {
-        NavigationSplitView {
-            List {
+        NavigationView {
+            VStack(alignment: .leading, spacing: 16) {
+                HStack {
+                    Text("Featured")
+                        .font(.largeTitle)
+                        .bold()
+
+                    Spacer()
+
+                    Button {
+                        showingProfile.toggle()
+                    } label: {
+                        Image(systemName: "person.crop.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }
+                }
+                .padding(.horizontal)
+
                 PageView(pages: modelData.features.map { FeatureCard(landmark: $0) })
+
+                List {
+                    ForEach(modelData.categories.keys.sorted(), id: \.self) { key in
+                        CategoryRow(categoryName: key, items: modelData.categories[key]!)
+                    }
                     .listRowInsets(EdgeInsets())
-                
-                ForEach(modelData.categories.keys.sorted(), id: \.self) { key in
-                    CategoryRow(categoryName: key, items: modelData.categories[key]!)
                 }
-                .listRowInsets(EdgeInsets())
-            }
-            .listStyle(.inset)
-            .navigationTitle("Featured")
-            .toolbar {
-                Button {
-                    showingProfile.toggle()
-                } label: {
-                    Label("User Profile", systemImage: "person.crop.circle")
-                }
+                .listStyle(.inset)
             }
             .sheet(isPresented: $showingProfile) {
                 ProfileHost()
                     .environment(modelData)
             }
-        } detail: {
-            Text("Select a Landmark")
         }
     }
 }
-
 
 #Preview {
     CategoryHome()
         .environment(ModelData())
 }
+

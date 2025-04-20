@@ -25,6 +25,7 @@ struct ProfileHost: View {
                 }
                 Spacer()
                 EditButton()
+                
             }
 
 
@@ -39,6 +40,7 @@ struct ProfileHost: View {
                         modelData.profile = draftProfile
                     }
             }
+    
         }
         .padding()
     }

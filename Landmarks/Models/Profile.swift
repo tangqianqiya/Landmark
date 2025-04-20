@@ -11,7 +11,7 @@ import Foundation
 struct Profile {
     var username: String
     var prefersNotifications = true
-    var seasonalPhoto = Season.winter
+    var seasonalPhoto = Season.male
     var goalDate = Date()
 
 
@@ -19,10 +19,8 @@ struct Profile {
 
 
     enum Season: String, CaseIterable, Identifiable {
-        case spring = "🌷"
-        case summer = "🌞"
-        case autumn = "🍂"
-        case winter = "☃️"
+        case male = "👨"
+        case female = "👩"
 
 
         var id: String { rawValue }
