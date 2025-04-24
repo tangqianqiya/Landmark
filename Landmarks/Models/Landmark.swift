@@ -17,6 +17,7 @@ struct Landmark: Hashable, Codable, Identifiable {
     var description: String
     var isFavorite: Bool
     var isFeatured: Bool
+    var chineseDescription: String?
 
 
     var category: Category
